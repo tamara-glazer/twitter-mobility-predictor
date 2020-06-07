@@ -1,0 +1,46 @@
+---
+title: "Data Preparation"
+author: "Tammy Glazer"
+output: pdf_document
+---
+
+Datasets to pull in and join for IL:
+
+1. County school closure date
+2. UNACAST mobility indicators
+
+```{r}
+# County Analysis: IL (School Closures)
+county_school <- read_csv("county_school_closures.csv")
+county_school <- county_school %>% select(state_id, county, start_date, end_date) %>%
+                                   dplyr::rename(state = state_id) %>%
+                                   filter(state == "IL")
+
+# Next get county level UNACAST mobility data
+county_mobility <- read_csv("sds-v3-full-county (1).csv")
+county_mobility <- county_mobility %>% filter(state_code == "IL") %>%
+                                       select(state_code, county_fips, county_name, county_population, date,
+                                              weekday, covid, grade_total,
+                                              n_grade_total, daily_distance_diff, grade_distance, n_grade_distance,
+                                              daily_visitation_diff, grade_visitation, n_grade_visitation,
+                                              encounters_rate, grade_encounters, n_grade_encounters) %>%
+                                       dplyr::rename(state_id = state_code, county = county_name) %>%
+                                       arrange(county, date)
+county_school_mobility <- left_join(county_mobility, county_school, by=c("state_id" = "state",
+                                                                         "county" = "county"))
+
+# Convert columns to dates
+county_school_mobility$start_date <- as.Date(county_school_mobility$start_date, "%m/%d/%y")
+
+# Calculate date diff (county)
+county_school_mobility$days_since_measure <- difftime(county_school_mobility$date,
+                                                      county_school_mobility$start_date,
+                                                      units=c("days"))
+
+# Create county_sip variable
+county_school_mobility <- county_school_mobility %>% mutate(school_closure = ifelse(date > start_date, 1, 0)) %>%
+                                                     mutate(school_closure = replace_na(school_closure, 0))
+
+# We have mobility data for 2/24 to 5/17
+write.csv(county_school_mobility, "school_mobility_county.csv", row.names=FALSE)
+```
