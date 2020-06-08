@@ -49,5 +49,3 @@ Scripts for merging and cleaning non-text features; scraping Twitter data.
 #### Modeling
 
 Scripts and results for our baseline (step 3) and neural-network (step 4) models.
-
-We store 
