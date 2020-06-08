@@ -11,7 +11,7 @@ We construct a binary outcome variable based on the daily grade assigned to a co
 Broadly speaking, our analysis takes the following steps:
 
 1. Gather feature data, including:
-- Mobility data from Unacast for each county of Illinois' 102 counties for all days February 24 - May 17
+- Mobility data from Unacast for each of Illinois' 102 counties on all days February 24 - May 17
 - Twitter data on historical tweets for all Illinois county-days (manually scraped using the Twitter API and Python GetOldTweets library)
 - Demographic data from the Census Bureau's 2016 5-year ACS
 - 2016 political and election data from MIT's Election Lab
@@ -22,7 +22,7 @@ Broadly speaking, our analysis takes the following steps:
 
 3. Run baseline models (logistic regression and random forests) for predicting mobility grades *without* textual Twitter data.
 
-4. Produce a neural network using the Python package Keras for predicting mobility using tweets and . The network architecture has the following traits:
+4. Produce a neural network using TensorFlow's high-level API for deep learning, Keras, to predict mobility using our scraped Twitter data. The network architecture has the following traits:
 - One hidden layer
 - ReLU activation
 - Binary cross-entropy loss
