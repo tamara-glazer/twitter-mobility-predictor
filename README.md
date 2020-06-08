@@ -38,14 +38,26 @@ As a further robustness check, we used the Python package "Botometer" from the N
 
 ### Repository Structure
 
-#### Data
-
-Output of data gathering and cleaning scripts.
+#### Link
+https://github.com/tamara-glazer/twitter-mobility-predictor  
 
 #### Data Preparation
 
-Scripts for merging and cleaning non-text features; scraping Twitter data.
+Scripts for merging and cleaning non-text features; scraping Twitter data.  
+
+- get_tweets_by_county.py: iteratively scrapes tweets by county  
+- featues_prep_and_cleaning.R: prepares non-text features  
+- data_preparation.Rmd: prepares UNACAST mobility data (outcome)  
 
 #### Modeling
 
-Scripts and results for our baseline (step 3) and neural-network (step 4) models.
+Scripts and results for our baseline (step 3) and neural-network (step 4) models.  
+
+- text_nn_pipeline.ipynb: performs text tokenization, computes embeddings, and trains a deep neural network to predict mobility at the county-day level
+- pipeline.py: feature preparation for baseline modeling
+- baseline_models.ipynb: calculates baseline metrics by running non-text data through logisitic regression and random forest models
+- botometer.ipynb: scores twitter account based on likelihood of being a bot  
+
+#### Data
+
+Output of data gathering and cleaning scripts.  
