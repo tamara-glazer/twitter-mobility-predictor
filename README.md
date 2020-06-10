@@ -40,7 +40,6 @@ As a further robustness check, we used the Python package "Botometer" from the N
 
 #### Link
 Repo: https://github.com/tamara-glazer/twitter-mobility-predictor
-Video: https://drive.google.com/file/d/1qW_H5TmHgr2aBF8hHJZ1bPZtQjcZkzEE/view?usp=sharing  
 
 #### Data Preparation
 
